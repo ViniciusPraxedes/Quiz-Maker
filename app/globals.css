@@ -1,0 +1,1417 @@
+:root { /* Defining the global CSS variable container */
+  --bg-color: #0b0f19; /* Custom CSS variable for primary dark background color */
+  --card-bg: rgba(20, 26, 46, 0.65); /* Custom CSS variable for glassmorphism card background */
+  --border-color: rgba(255, 255, 255, 0.08); /* Custom CSS variable for border line styling */
+  --text-primary: #f8fafc; /* Custom CSS variable for primary text content color */
+  --text-secondary: #94a3b8; /* Custom CSS variable for secondary descriptions text */
+  --accent-start: #005DE5; /* Custom CSS variable for accent color gradient start (SAP Blue) */
+  --accent-end: #00a5ff; /* Custom CSS variable for accent color gradient end (Light SAP Blue) */
+  --btn-hover: #0044b3; /* Custom CSS variable for primary action hover state background */
+  --correct-bg: rgba(16, 185, 129, 0.15); /* Custom CSS variable for correct answers container background */
+  --correct-border: #10b981; /* Custom CSS variable for correct answers border outline */
+  --incorrect-bg: rgba(239, 68, 68, 0.15); /* Custom CSS variable for incorrect selections background */
+  --incorrect-border: #ef4444; /* Custom CSS variable for incorrect selections border outline */
+  --font-family: 'Outfit', sans-serif; /* Custom CSS variable for typography font selection */
+  --shadow-main: 0 10px 40px 0 rgba(0, 0, 0, 0.4); /* Custom CSS variable for premium deep container shadow styling */
+} /* Terminating CSS custom variables root definition block */
+body.light-mode { /* Overriding variable definitions when light mode stylesheet class is active */
+  --focus-action-bg: #c2c3c4; /* Flattened solid color for focus mode */
+  --bg-color: #f1f5f9; /* Overriding with light grey canvas background */
+  --card-bg: rgba(255, 255, 255, 0.75); /* Overriding with semi-transparent white card canvas */
+  --border-color: rgba(15, 23, 42, 0.08); /* Overriding with soft dark border lines */
+  --text-primary: #0f172a; /* Overriding with deep slate text for high readability */
+  --text-secondary: #64748b; /* Overriding with medium grey text color */
+  --accent-start: #005DE5; /* Adjusting gradient color for light contrast */
+  --accent-end: #00a5ff; /* Adjusting gradient color for light contrast */
+  --btn-hover: #0044b3; /* Adjusting button hover colors */
+  --shadow-main: 0 10px 30px 0 rgba(15, 23, 42, 0.08); /* Adjusting shadows to be soft and grey */
+} /* Terminating light mode override block */
+* { /* Selecting all HTML elements on the page */
+  box-sizing: border-box; /* Enforcing padding and border inclusion in element dimensions calculation */
+  margin: 0; /* Removing default margin space from all elements */
+  padding: 0; /* Removing default padding space from all elements */
+} /* Terminating wildcard styles block */
+body { /* Styling the master document body node */
+  background-color: var(--bg-color); /* Applying dynamic background color from variables */
+  color: var(--text-primary); /* Applying dynamic text primary color */
+  font-family: var(--font-family); /* Applying Outfit font family configuration */
+  min-height: 100vh; /* Scaling body height to fill browser screen */
+  position: relative; /* Setting relative position anchor for internal absolute panels placement */
+  overflow-x: hidden; /* Suppressing horizontal scrollbars from rendering */
+  transition: background-color 0.4s ease, color 0.4s ease; /* Transition effect for background and text toggling */
+} /* Terminating body styles block */
+/* Styling body node and HTML node when active quiz step is active */
+html.quiz-active,
+body.quiz-active {
+  /* Disabling vertical scrolling */
+  overflow-y: hidden;
+}
+.glass-bg { /* Styling decorative background layer elements */
+  position: absolute; /* Floating independent of standard grid layout */
+  width: 500px; /* Defining fixed layer width */
+  height: 500px; /* Defining fixed layer height */
+  background: radial-gradient(circle, rgba(0, 93, 229, 0.15) 0%, rgba(0, 165, 255, 0) 70%); /* Colorful radiant circular aura style with SAP Blue */
+  top: -150px; /* Positioning aura partially above page view area */
+  right: -100px; /* Positioning aura partially right of page view area */
+  z-index: -1; /* Ensuring aura sits behind content panels */
+  filter: blur(80px); /* Applying blur filter for smooth glowing aesthetic */
+} /* Terminating glass-bg styles block */
+/* Styling layout wrap container */
+.container {
+  /* Restricting maximum layout width stretch */
+  max-width: 1300px;
+  /* Centering container element horizontally */
+  margin: 0 auto;
+  /* Applying top-bottom and side padding values */
+  padding: 1.5rem 1.5rem;
+}
+/* Styling header layout bar */
+.app-header {
+  /* Setting alignment layout model to Flexbox */
+  display: flex;
+  /* Placing logo on left and theme switcher on right */
+  justify-content: space-between;
+  /* Vertical alignment of logo and switcher */
+  align-items: center;
+  /* Forcing vertical spacing before grid content */
+  margin-bottom: 1.5rem;
+  /* Center the header horizontally */
+  margin-left: auto;
+  /* Center the header horizontally */
+  margin-right: auto;
+  /* Constrain header width in step 1 */
+  max-width: 800px;
+  /* Span full width of layout container */
+  width: 100%;
+}
+/* Adjust header max-width when layout has sidebar active */
+.container:has(.wizard-layout.has-sidebar) .app-header {
+  /* Expand max-width to match the two-column sidebar layout width */
+  max-width: 1152px;
+/* Terminating custom sidebar layout header block */
+}
+.logo-area { /* Styling logo parent container */
+  display: flex; /* Setting alignment layout model to Flexbox */
+  align-items: center; /* Vertical alignment of logo components */
+  gap: 0.8rem; /* Horizontal separation distance between icon and title text */
+} /* Terminating logo-area styles block */
+.logo-icon-img { /* Styling custom logo image */
+  height: 40px; /* Setting fixed height for the logo */
+  width: auto; /* Maintaining aspect ratio */
+  object-fit: contain; /* Ensuring image fits within bounds */
+} /* Terminating logo-icon-img styles block */
+.app-header h1 { /* Styling main heading title */
+  font-size: 1.8rem; /* Setting header typography font size */
+  font-weight: 800; /* Enforcing black bold text weight */
+  letter-spacing: -0.5px; /* Compacting letter-spacing for premium feel */
+} /* Terminating h1 styles block */
+/* Styling sub-text within main heading */
+.app-header h1 span {
+  /* Applying indigo-to-purple gradient */
+  background: linear-gradient(135deg, var(--accent-start) 0%, var(--accent-end) 100%);
+  /* Clipping background overlay shape to character silhouettes */
+  -webkit-background-clip: text;
+  /* Making text transparent to show gradient background */
+  -webkit-text-fill-color: transparent;
+  /* Prevent word wrapping inside the span */
+  white-space: nowrap;
+/* Terminating header span styles block */
+}
+.theme-btn { /* Styling theme toggle button */
+  background-color: var(--card-bg); /* Using glass-like variable background */
+  border: 1px solid var(--border-color); /* Outlining button with dynamic borders */
+  color: var(--text-primary); /* Coloring button text */
+  padding: 0.6rem 1.2rem; /* Padding buttons for comfortable touch interface click */
+  border-radius: 50px; /* Rounding button completely to oval shape */
+  font-family: var(--font-family); /* Applying Outfit typography */
+  font-weight: 600; /* Applying semi-bold weight */
+  cursor: pointer; /* Turning cursor indicator to pointer hand on hover */
+  transition: all 0.3s ease; /* Animation properties transition */
+} /* Terminating theme-btn styles block */
+.theme-btn:hover { /* Hover styling interaction for theme toggle */
+  transform: translateY(-2px); /* Slightly lifting button */
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.15); /* Soft accent indigo shadow glow */
+  border-color: var(--accent-start); /* Highlighting border with accent color */
+} /* Terminating theme-btn hover block */
+.wizard-layout { /* Center-focused layout area wrapper for the step-by-step card */
+  display: flex; /* Setting alignment layout model to Flexbox */
+  justify-content: center; /* Centering the wizard card horizontally */
+  align-items: center; /* Centering the wizard card vertically */
+  width: 100%; /* Spanning layout full width of the container */
+} /* Terminating wizard-layout styles block */
+/* Layout overrides when two-column sidebar view is active */
+.wizard-layout.has-sidebar {
+  /* Enforce grid layout mode */
+  display: grid;
+  /* Set column widths (320px sidebar, remaining space card) */
+  grid-template-columns: 320px 1fr;
+  /* Align items to the top of the columns */
+  align-items: start;
+  /* Margin spacing separating sidebar and main card */
+  gap: 2rem;
+  /* Center the layout horizontally */
+  margin-left: auto;
+  /* Center the layout horizontally */
+  margin-right: auto;
+  /* Constrain layout width when sidebar is visible */
+  max-width: 1152px;
+/* Terminating has-sidebar grid layout block */
+}
+.outline-sidebar { /* Custom sidebar panel styling */
+  position: sticky; /* Keep sidebar in view during scroll actions */
+  top: 2rem; /* Vertical offset constraint from top of viewport */
+  display: flex; /* Flexbox alignment layout model */
+  flex-direction: column; /* Align components vertically inside sidebar */
+  gap: 1.5rem; /* Gap spacing separating title and outline list */
+  max-width: 100%; /* Constraints to container width */
+} /* Terminating outline-sidebar styles block */
+.outline-sidebar h2 { /* Sidebar title heading styling rules */
+  font-size: 1.3rem; /* Typography size scaling */
+  font-weight: 800; /* Bold weight settings */
+  letter-spacing: -0.3px; /* Slightly compact characters layout */
+  background: linear-gradient(135deg, var(--accent-start) 0%, var(--accent-end) 100%); /* Accent color gradient background */
+  -webkit-background-clip: text; /* Clip color overlay to silhouetted text characters */
+  -webkit-text-fill-color: transparent; /* Set fill to transparent showing background gradient color */
+} /* Terminating outline-sidebar title styles block */
+.outline-sidebar .outline-controls { /* Styles for select/deselect controls container in syllabus sidebar */
+  display: flex; /* Enforces flexible row layout alignment */
+  gap: 0.5rem; /* Margins spacing separating the controls buttons */
+  margin-top: -0.5rem; /* Reduces top margins to pull controls closer to heading */
+} /* Terminating outline-controls styles block */
+.outline-sidebar .small-btn { /* Smaller variant of secondary buttons for compact control actions */
+  padding: 0.4rem 0.8rem; /* Decreased vertical and horizontal padding sizes */
+  font-size: 0.8rem; /* Smaller typography size */
+  flex: 1; /* Instructs buttons to share space equally inside flexbox container */
+} /* Terminating small-btn styles block */
+.outline-sidebar .outline-tree { /* Syllabus outline container overrides inside sidebar */
+  max-height: 500px; /* Increased maximum vertical scroll container height inside sidebar */
+} /* Terminating outline-tree sidebar height override */
+.outline-sidebar.read-only { /* Read-only active quiz state sidebar styling rules */
+  pointer-events: none; /* Disable all hover/click cursor triggers inside sidebar */
+  opacity: 0.65; /* Fading the container opacity to indicate disabled interaction */
+  transition: opacity 0.3s ease; /* Fade transitions */
+} /* Terminating read-only sidebar styling */
+.wizard-card { /* Main interactive container card for all steps */
+  max-width: 800px; /* Restricting maximum card width for focus */
+  width: 100%; /* Spanning width to 100% of parent container */
+  margin: 0 auto; /* Centering card horizontally in page */
+  /* Enable overflow clipping to keep rounded borders clean */
+  overflow: hidden;
+} /* Terminating wizard-card styles block */
+/* Common class definitions for glassmorphic containers */
+.glass-panel {
+  /* Setting glassmorphic overlay background */
+  background-color: var(--card-bg);
+  /* Blurring items rendered behind panels */
+  backdrop-filter: blur(16px);
+  /* Safari support for background blur filter */
+  -webkit-backdrop-filter: blur(16px);
+  /* Outlining glass panels */
+  border: 1px solid var(--border-color);
+  /* Softly rounding card panel corners */
+  border-radius: 16px;
+  /* Creating content breathing room inside panels */
+  padding: 1.5rem;
+  /* Adding soft dark deep shadows */
+  box-shadow: var(--shadow-main);
+}
+/* Individual wizard step page element wrap */
+.step-container {
+  /* Setting alignment layout model to Flexbox */
+  display: flex;
+  /* Aligning list components vertically */
+  flex-direction: column;
+  /* Vertical margins separating components inside step */
+  gap: 1.2rem;
+}
+.step-description { /* Helper text guiding users through steps */
+  font-size: 0.95rem; /* Typography font size */
+  color: var(--text-secondary); /* Text secondary color */
+  line-height: 1.5; /* Line height readability scale */
+} /* Terminating step-description styles block */
+.input-group { /* Styling form input wrap containers */
+  display: flex; /* Setting alignment layout model to Flexbox */
+  flex-direction: column; /* Vertical alignment layout stack for labels and inputs */
+  gap: 0.6rem; /* Vertical gap spacing separating elements */
+} /* Terminating input-group styles block */
+label { /* Styling form input helper text labels */
+  font-size: 0.9rem; /* Sizing text labels */
+  font-weight: 600; /* Set labels weight to semi-bold */
+  color: var(--text-primary); /* Coloring label text */
+  opacity: 0.9; /* Softly blending labels opacity */
+} /* Terminating label styles block */
+textarea, input[type="text"], input[type="password"], input[type="number"], select { /* Selecting all form input fields */
+  background-color: rgba(15, 23, 42, 0.4); /* Solid deep grey background with opacity */
+  border: 1px solid var(--border-color); /* Outlining input boundaries */
+  border-radius: 8px; /* Rounding input borders */
+  padding: 0.8rem 1rem; /* Creating internal padding for easier typing interaction */
+  font-family: var(--font-family); /* Setting font family Outfit */
+  color: var(--text-primary); /* Coloring typed character text */
+  font-size: 0.95rem; /* Sizing typed character text */
+  transition: all 0.3s ease; /* Configuring interaction transitions */
+} /* Terminating input fields styles block */
+/* Styling select elements specifically */
+select {
+  /* Hide native browser arrow for Webkit */
+  -webkit-appearance: none;
+  /* Hide native browser arrow for Firefox */
+  -moz-appearance: none;
+  /* Hide native browser arrow */
+  appearance: none;
+  /* Add custom chevron-down SVG background image */
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  /* Position chevron-down background image with 1.25rem right margin */
+  background-position: right 1.25rem center;
+  /* Do not repeat background image */
+  background-repeat: no-repeat;
+  /* Set background image width and height dimensions */
+  background-size: 0.9rem;
+  /* Increase padding-right to accommodate custom chevron-down arrow position */
+  padding-right: 2.75rem;
+/* Terminating select selector block */
+}
+/* Tweaking input background contrast for light mode */
+body.light-mode textarea, body.light-mode input, body.light-mode select {
+  /* Applying clean white background */
+  background-color: rgba(255, 255, 255, 0.85);
+/* Terminating light mode input contrast override */
+}
+/* Styling select elements specifically in light mode */
+body.light-mode select {
+  /* Update SVG background image with darker grey stroke for light mode contrast */
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+/* Terminating light-mode select block */
+}
+textarea:focus, input:focus, select:focus { /* Highlighting inputs on user focus */
+  outline: none; /* Disabling browser default outline border */
+  border-color: var(--accent-start); /* Styling border with indigo accent color */
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15); /* Applying soft indigo ring glow */
+} /* Terminating focused input styling */
+.row-group { /* Horizontal rows container block */
+  display: flex; /* Setting alignment layout model to Flexbox */
+  gap: 1rem; /* Gap separating items on the row */
+} /* Terminating row-group styles block */
+.half { /* Styling half-width columns */
+  flex: 1; /* Expanding component width to split container width equally */
+} /* Terminating half-width styles block */
+.primary-btn { /* Styling call-to-action primary buttons */
+  background: linear-gradient(135deg, var(--accent-start) 0%, var(--accent-end) 100%); /* Indigo-purple accent background gradient */
+  border: none; /* Disabling border outline on background gradient button */
+  color: #ffffff; /* Coloring text white for readability */
+  padding: 0.9rem 1.8rem; /* Comfortable click padding dimensions */
+  border-radius: 8px; /* Rounding button corners */
+  font-family: var(--font-family); /* Font family style setup */
+  font-weight: 600; /* Setting semi-bold weight */
+  font-size: 1.0rem; /* Button text size setting */
+  cursor: pointer; /* Changing pointer icon to pointer hand */
+  transition: all 0.3s ease; /* Applying hover transitions */
+  box-shadow: 0 4px 15px rgba(0, 93, 229, 0.25); /* Accenting button with drop shadow */
+  text-align: center; /* Centering button text */
+} /* Terminating primary-btn styles block */
+.primary-btn:hover { /* Hover styling for primary button */
+  transform: translateY(-2px); /* Lifting button slightly */
+  box-shadow: 0 6px 20px rgba(0, 93, 229, 0.35); /* Amplifying drop shadow glow */
+  filter: brightness(1.1); /* Slightly brightening gradient colors */
+} /* Terminating primary-btn hover styles */
+.primary-btn:active { /* Button behavior styling on mouse click down */
+  transform: translateY(0); /* Lowering button back to baseline */
+} /* Terminating primary-btn active styles */
+/* Styling cancel button mode using red gradient */
+.primary-btn.cancel-mode {
+  /* Red background gradient for warning/cancel action */
+  background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+  /* Red drop shadow glow */
+  box-shadow: 0 4px 15px rgba(220, 38, 38, 0.25);
+  /* Closing bracket for cancel-mode selector rules */
+}
+/* Hover styles for cancel button mode */
+.primary-btn.cancel-mode:hover {
+  /* Amplifying red drop shadow glow on hover */
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.35);
+  /* Closing bracket for hover cancel-mode rules */
+}
+.wizard-actions { /* Action button wrapper block for step transitions */
+  display: flex; /* Setting alignment layout model to Flexbox */
+  justify-content: space-between; /* Placing back button left and forward button right */
+  gap: 1rem; /* Margins separating the buttons */
+  margin-top: 1rem; /* Separation spacing above controls */
+} /* Terminating wizard-actions styles block */
+.wizard-actions .primary-btn, .wizard-actions .secondary-btn { /* Make navigation buttons share space evenly if needed */
+  flex: 1; /* Expanding component width to split container width equally */
+  max-width: 250px; /* Restricting maximum navigation button size */
+} /* Terminating navigation button width adjustments */
+.wizard-actions .primary-btn:only-child { /* Targets only-child primary buttons */
+  max-width: 100%; /* Allow single primary buttons to take full width */
+} /* Terminating only-child adjustments */
+.actions-group { /* Action button layout container for PDF and JSON */
+  display: flex; /* Setting alignment layout model to Flexbox */
+  gap: 0.75rem; /* Horizontal distance spacing between button items */
+  transition: opacity 0.3s ease; /* Smooth fade transitions */
+} /* Terminating actions-group styles block */
+.secondary-btn { /* Secondary action buttons styling rules */
+  background-color: transparent; /* Removing default background styling */
+  border: 1px solid var(--border-color); /* Outlining borders in grey */
+  color: var(--text-primary); /* Sizing button text color */
+  padding: 0.9rem 1.8rem; /* Click padding layout settings */
+  border-radius: 8px; /* Softly rounding border corners */
+  font-family: var(--font-family); /* Font family Outfit setup */
+  font-weight: 600; /* Setting font to semi-bold */
+  font-size: 1.0rem; /* Formatting typography size */
+  cursor: pointer; /* Turning cursor to pointer hand */
+  transition: all 0.3s ease; /* Setting transitions */
+  text-align: center; /* Centering button text */
+} /* Terminating secondary-btn styles block */
+.secondary-btn:hover { /* Hover styling for secondary button */
+  border-color: var(--accent-start); /* Outlining border color in indigo */
+  background-color: rgba(99, 102, 241, 0.05); /* Soft background overlay tint */
+} /* Terminating secondary-btn hover block */
+.status-box { /* Informational status alerts card box container */
+  margin-top: 1.5rem; /* Separating status box from wizard actions */
+  padding: 1.25rem; /* Adding padding space for message text */
+  border-radius: 8px; /* Rounding card box border corners */
+  background-color: rgba(99, 102, 241, 0.05); /* Tinting background with soft indigo highlight */
+  border: 1px dashed var(--accent-start); /* Dashed outline styling using indigo */
+  color: var(--text-secondary); /* Text secondary color */
+  line-height: 1.5; /* Line height readability scale */
+  display: flex; /* Flexible layout structure */
+  flex-direction: column; /* Stacking items vertically */
+  align-items: center; /* Centering items horizontally */
+  gap: 0.5rem; /* Visual separation spacing */
+} /* Terminating status-box styles block */
+.status-box.error { /* Error response alerts state styles */
+  background-color: var(--incorrect-bg); /* Setting error red background overlay tint */
+  border-color: var(--incorrect-border); /* Setting error border color */
+  color: #f8fafc; /* Forcing text color to white for contrast */
+  max-height: 150px; /* Restrict maximum height for long error messages */
+  overflow-y: auto; /* Enable internal vertical scrolling for long errors */
+  overflow-wrap: break-word; /* Break extremely long strings to prevent horizontal overflow */
+  align-items: flex-start; /* Left-align text in error messages for readability */
+} /* Terminating error status-box styling */
+.status-box.loading { /* Loading progress alerts state styles */
+  background-color: rgba(255, 255, 255, 0.02); /* Fading background container tint */
+  border-color: var(--border-color); /* Neutral border outline */
+} /* Terminating loading status-box styling */
+/* Gemini-style sparkle loader icon container */
+.loader-spinner {
+  /* Fix size so flexbox cannot squish it */
+  width: 40px;
+  /* Fix height matching width */
+  height: 40px;
+  /* Prevent container from shrinking below defined size */
+  flex-shrink: 0;
+  /* Animate a shimmer pulse scale effect */
+  animation: gemini-pulse 1.8s ease-in-out infinite;
+  /* SVG fill handled by the element itself */
+  filter: drop-shadow(0 0 6px rgba(99, 102, 241, 0.7));
+} /* Terminating loader-spinner styles block */
+/* Gemini sparkle SVG path gradient fill */
+.loader-spinner svg {
+  /* Full width of container */
+  width: 100%;
+  /* Full height of container */
+  height: 100%;
+} /* Terminating loader-spinner svg block */
+/* Gemini pulse scale keyframe animation */
+@keyframes gemini-pulse {
+  /* Resting state at normal scale */
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  /* Peak glow mid-animation */
+  50% { transform: scale(1.15) rotate(15deg); opacity: 0.75; }
+} /* Terminating gemini-pulse keyframes */
+/* Wrapper providing relative positioning anchor for floating particles */
+.gemini-loader-wrapper {
+  /* Relative so particles can be positioned absolutely inside */
+  position: relative;
+  /* Fixed width to contain particle field */
+  width: 80px;
+  /* Fixed height matching particle travel distance */
+  height: 80px;
+  /* Center the spinner inside the wrapper */
+  display: flex;
+  /* Center horizontally */
+  align-items: center;
+  /* Center vertically */
+  justify-content: center;
+  /* Prevent wrapper from shrinking in flex parent */
+  flex-shrink: 0;
+} /* Terminating gemini-loader-wrapper block */
+/* Individual floating particle dot */
+.particle {
+  /* Absolute position inside the wrapper */
+  position: absolute;
+  /* Small circular dot size */
+  width: 5px;
+  /* Matching height for circular shape */
+  height: 5px;
+  /* Rounded into a circle */
+  border-radius: 50%;
+  /* Default indigo color, overridden per particle */
+  background: #6366f1;
+  /* Hidden initially, animation controls opacity */
+  opacity: 0;
+  /* Apply float-up animation, duration and delay set per particle */
+  animation: float-up 2.4s ease-in infinite;
+} /* Terminating particle base styles */
+/* Particle 1 — left side, indigo */
+.particle:nth-child(1) {
+  /* Horizontal offset left of center */
+  left: 10px;
+  /* Start at vertical center */
+  top: 40px;
+  /* Indigo color */
+  background: #6366f1;
+  /* No delay, starts immediately */
+  animation-delay: 0s;
+} /* End particle 1 */
+/* Particle 2 — right side, purple */
+.particle:nth-child(2) {
+  /* Horizontal offset right of center */
+  right: 10px;
+  /* Start at vertical center */
+  top: 40px;
+  /* Purple color */
+  background: #a855f7;
+  /* Staggered delay */
+  animation-delay: 0.6s;
+} /* End particle 2 */
+/* Particle 3 — far left, lighter indigo */
+.particle:nth-child(3) {
+  /* Far left offset */
+  left: 4px;
+  /* Slightly lower start position */
+  top: 50px;
+  /* Lighter indigo tint */
+  background: #818cf8;
+  /* Staggered delay */
+  animation-delay: 1.2s;
+} /* End particle 3 */
+/* Particle 4 — center-right, fuchsia */
+.particle:nth-child(4) {
+  /* Slight right of center */
+  right: 18px;
+  /* Lower start position */
+  top: 52px;
+  /* Fuchsia pink */
+  background: #d946ef;
+  /* Staggered delay */
+  animation-delay: 1.8s;
+} /* End particle 4 */
+/* Particle 5 — center, indigo */
+.particle:nth-child(5) {
+  /* Centered horizontally */
+  left: 37px;
+  /* Bottom start position */
+  top: 55px;
+  /* Indigo */
+  background: #6366f1;
+  /* Staggered delay */
+  animation-delay: 0.3s;
+} /* End particle 5 */
+/* Float-up keyframe — drifts upward and fades out */
+@keyframes float-up {
+  /* Start at rest position, invisible */
+  0% { transform: translateY(0) scale(1); opacity: 0; }
+  /* Appear and start rising */
+  20% { opacity: 0.9; }
+  /* Peak height, begin fading */
+  80% { transform: translateY(-50px) scale(0.5); opacity: 0.3; }
+  /* Fully faded at top */
+  100% { transform: translateY(-65px) scale(0); opacity: 0; }
+} /* Terminating float-up keyframes */
+.player-header { /* Header panel containing progress metrics inside single question view */
+  display: flex; /* Setting alignment layout model to Flexbox */
+  flex-direction: column; /* Stacking progress elements vertically */
+  gap: 0.6rem; /* Vertical margins separating items */
+  border-bottom: 1px solid var(--border-color); /* Add bottom divider line */
+  /* Vertical layout padding margins */
+  padding-bottom: 0.8rem;
+} /* Terminating player-header styles block */
+.question-indicator { /* Meta label styling for progress indicators */
+  font-size: 0.85rem; /* Sizing question indicators small */
+  color: var(--accent-start); /* Applying indigo colors */
+  font-weight: 600; /* Bold typeface setting */
+  text-transform: uppercase; /* Forcing label to uppercase */
+  letter-spacing: 0.5px; /* Spacing letters slightly */
+} /* Terminating question-indicator styles block */
+.progress-bar-container { /* Track container for progress indicator */
+  width: 100%; /* Spanning full width of the card */
+  height: 6px; /* Sizing track line thin */
+  background-color: rgba(255, 255, 255, 0.05); /* Faint background overlay canvas */
+  border-radius: 50px; /* Rounding progress track edges */
+  overflow: hidden; /* Trimming overflow fills */
+} /* Terminating progress-bar-container styles block */
+.progress-bar-fill { /* Dynamic fill showing active percentage completion */
+  height: 100%; /* Spanning full height of the track */
+  background: linear-gradient(90deg, var(--accent-start), var(--accent-end)); /* Applying colorful gradient fill */
+  border-radius: 50px; /* Rounding fill edges */
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth sizing transitions */
+  /* Apply infinite breathing animation */
+  animation: breathe 2s ease-in-out infinite;
+} /* Terminating progress-bar-fill styles block */
+/* Animation keyframes for the breathing effect */
+@keyframes breathe {
+  /* Start of breathing animation cycle */
+  0%, 100% {
+    /* Set opacity to 0.65 */
+    opacity: 0.65;
+    /* Soft glowing box shadow */
+    box-shadow: 0 0 4px var(--accent-start);
+  /* Closing bracket for start state */
+  }
+  /* Midpoint of breathing animation cycle */
+  50% {
+    /* Set opacity to 1 */
+    opacity: 1;
+    /* Bright glowing box shadow */
+    box-shadow: 0 0 12px var(--accent-end);
+  /* Closing bracket for mid state */
+  }
+/* Closing bracket for breathe keyframes */
+}
+.question-card { /* Container box for rendering the active interactive question */
+  padding: 1.5rem 0; /* Vertical layout padding margins */
+} /* Terminating question-card styles block */
+.quiz-meta { /* Metadata tag above question titles */
+  font-size: 0.8rem; /* Small font size */
+  color: var(--text-secondary); /* Grey secondary color */
+  font-weight: 600; /* Bold typeface */
+  margin-bottom: 0.5rem; /* Spacing beneath tag */
+} /* Terminating quiz-meta styles block */
+.question-text { /* Question title typography rules */
+  /* Question texts size */
+  font-size: 1.1rem;
+  font-weight: 600; /* Semi-bold */
+  color: var(--text-primary); /* Primary text color */
+  /* Spacing separating question and choices */
+  margin-bottom: 0.8rem;
+  line-height: 1.4; /* Line height readability scale */
+} /* Terminating question-text styles block */
+.options-list { /* Question choices wrap container */
+  display: flex; /* Flexbox alignment layout model */
+  flex-direction: column; /* Aligning list components vertically */
+  /* Separation distance between choices */
+  gap: 0.5rem;
+} /* Terminating options-list styles block */
+.option-item { /* Question answer choices interactive items */
+  display: flex; /* Setting alignment layout model to Flexbox */
+  /* Distributing child elements to opposite ends of the container */
+  justify-content: space-between;
+  align-items: center; /* Aligning components inside option horizontally */
+  /* Click padding layout settings */
+  padding: 0.6rem 1rem;
+  background-color: rgba(15, 23, 42, 0.2); /* Semi-transparent option item block */
+  border: 1px solid var(--border-color); /* Outlining options list */
+  border-radius: 8px; /* Rounding button container corners */
+  cursor: pointer; /* Pointer hands cursor hover effect */
+  transition: all 0.25s ease; /* Setting element transition speeds */
+  /* Sizing choice typography */
+  font-size: 0.85rem;
+  line-height: 1.4; /* Text line height */
+} /* Terminating option-item styles block */
+body.light-mode .option-item { /* Adapting option items contrast for light mode */
+  background-color: rgba(255, 255, 255, 0.5); /* Sizing light grey item canvases */
+} /* Terminating light mode option-item contrast override */
+.option-item:hover { /* Hover styling interaction for option selection items */
+  border-color: var(--accent-start); /* Accent border color to indigo */
+  background-color: rgba(99, 102, 241, 0.05); /* Tinting selection backgrounds in indigo */
+} /* Terminating option-item hover block */
+.option-item.selected { /* Selected styling state when option is active */
+  background-color: rgba(99, 102, 241, 0.15); /* Coloring selection background overlay */
+  border-color: var(--accent-start); /* Outlining selection border to indigo */
+} /* Terminating selected option-item styling */
+.option-item.correct { /* Selection status when correct answer is revealed */
+  background-color: var(--correct-bg); /* Setting green background tint */
+  border-color: var(--correct-border); /* Setting green borders outline */
+} /* Terminating correct option-item styling */
+.option-item.incorrect { /* Selection status when incorrect choice is active */
+  background-color: var(--incorrect-bg); /* Setting red background tint */
+  border-color: var(--incorrect-border); /* Setting red borders outline */
+} /* Terminating incorrect option-item styling */
+/* Styling option status icons */
+.option-icon {
+  /* Enforcing flex alignment centering */
+  display: flex;
+  /* Centering icon vertically */
+  align-items: center;
+  /* Centering icon horizontally */
+  justify-content: center;
+  /* Defining fixed width */
+  width: 32px;
+  /* Defining fixed height */
+  height: 32px;
+  /* Flexible shrink disabled */
+  flex-shrink: 0;
+  /* Closing bracket for option-icon rules */
+}
+/* Styling correct checkmark icon colors */
+.option-icon.correct-icon {
+  /* Using green accent color */
+  color: var(--correct-border);
+  /* Closing bracket for correct-icon rules */
+}
+/* Styling incorrect crossmark icon colors */
+.option-icon.incorrect-icon {
+  /* Using red accent color */
+  color: var(--incorrect-border);
+  /* Closing bracket for incorrect-icon rules */
+}
+/* Styling details element container for explanation panel */
+.explanation-panel {
+  /* Reducing internal padding of explanation container */
+  padding: 0.6rem 0.8rem;
+  /* Rounding corner borders of explanation container */
+  border-radius: 8px;
+  /* Scaling down explanation font size */
+  font-size: 0.75rem;
+  /* Adjusting line height for density */
+  line-height: 1.4;
+  /* Adding translucent green background color styling */
+  background-color: rgba(16, 185, 129, 0.06);
+  /* Adding solid green left accent border line */
+  border-left: 3px solid var(--correct-border);
+  /* Reducing top margin gap of panel container */
+  margin-top: 0.5rem;
+  /* Registering slideDown animation transitions */
+  animation: slideDown 0.25s ease;
+/* Closing bracket for explanation panel styles */
+}
+/* Registering keyframes for vertical slideDown transition */
+@keyframes slideDown {
+  /* Initial state of the animation */
+  from { opacity: 0; transform: translateY(-5px); }
+  /* Final state of the animation */
+  to { opacity: 1; transform: translateY(0); }
+/* Closing bracket for keyframes definition */
+}
+/* Styling details summary toggle header elements */
+.explanation-summary {
+  /* Showing pointer hand cursor indicator on hover */
+  cursor: pointer;
+  /* Applying semi-bold text weight styling */
+  font-weight: 600;
+  /* Coloring summary toggle label green */
+  color: var(--correct-border);
+  /* Disabling keyboard focus border outlines */
+  outline: none;
+  /* Suppressing text selection cursor highlights */
+  user-select: none;
+  /* Removing browser default details arrow marker */
+  list-style: none;
+/* Closing bracket for explanation summary styles */
+}
+/* Styling details summary webkit browser markers */
+.explanation-summary::-webkit-details-marker {
+  /* Hiding marker indicator symbol */
+  display: none;
+/* Closing bracket for summary webkit marker rule */
+}
+/* Styling virtual indicator arrow icon inside summary */
+.explanation-summary::before {
+  /* Injecting custom arrow triangle indicator symbol */
+  content: "▶";
+  /* Enforcing inline-block alignment layout */
+  display: inline-block;
+  /* Transitioning arrow rotation properties */
+  transition: transform 0.2s ease;
+  /* Adjusting indicator arrow font size */
+  font-size: 0.7rem;
+  /* Margin spacing separating arrow and label text */
+  margin-right: 0.4rem;
+/* Closing bracket for summary arrow marker rule */
+}
+/* Styling details summary element state when expanded */
+.explanation-panel[open] .explanation-summary::before {
+  /* Rotating arrow indicator 90 degrees downward */
+  transform: rotate(90deg);
+/* Closing bracket for open summary arrow rotate rule */
+}
+/* Styling content area container inside details element */
+.explanation-content {
+  /* Creating space above details text contents */
+  margin-top: 0.5rem;
+  /* Creating space inside top boundary margin line */
+  padding-top: 0.5rem;
+  /* Drawing dashed divider line separation layout border */
+  border-top: 1px dashed rgba(16, 185, 129, 0.15);
+/* Closing bracket for explanation content rules */
+}
+/* Styling bold labels inside explanation details panel */
+.explanation-panel strong {
+  /* Coloring strong label elements green */
+  color: var(--correct-border);
+  /* Setting bold elements display to inline */
+  display: inline;
+/* Closing bracket for explanation strong rules */
+}
+.player-actions { /* Navigation button wrapper block inside interactive player */
+  display: flex; /* Setting alignment layout model to Flexbox */
+  justify-content: space-between; /* Placing back button left and forward button right */
+  gap: 1rem; /* Margins separating the buttons */
+  /* Separation spacing above controls */
+  margin-top: 0.5rem;
+  border-top: 1px solid var(--border-color); /* Add top boundary division line */
+  /* Create breathing room above buttons */
+  padding-top: 0.8rem;
+  position: sticky; /* Sticky position to stay in viewport */
+  bottom: 0; /* Stick to bottom edge */
+  background-color: var(--card-bg); /* Match card background */
+  backdrop-filter: blur(16px); /* Apply glass blur effect */
+  -webkit-backdrop-filter: blur(16px); /* Safari support for blur */
+  /* Add bottom padding */
+  padding-bottom: 0.6rem;
+  z-index: 10; /* Keep above other elements */
+  border-bottom-left-radius: 16px; /* Match card radius */
+  border-bottom-right-radius: 16px; /* Match card radius */
+} /* Terminating player-actions styles block */
+.player-actions .primary-btn, .player-actions .secondary-btn { /* Adjust player buttons dimensions */
+  flex: 1; /* Space layout sharing */
+  max-width: 200px; /* Max widths constraint */
+} /* Terminating player button dimensions setup */
+.summary-header { /* Header panel containing title and utility buttons on score screen */
+  display: flex; /* Flexbox alignment layout model */
+  justify-content: space-between; /* Place title left and export buttons right */
+  align-items: center; /* Centering layouts vertically on header */
+  border-bottom: 1px solid var(--border-color); /* Add bottom divider line */
+  padding-bottom: 1.2rem; /* Spacing metrics */
+  margin-bottom: 1.5rem; /* Spacing metrics */
+} /* Terminating summary-header styles block */
+.score-dashboard { /* Metrics dashboard panel container on results screen */
+  display: flex; /* Setting alignment layout model to Flexbox */
+  align-items: center; /* Centering items vertically on row layout */
+  gap: 2rem; /* Margin metrics separating dashboard columns */
+  background-color: rgba(15, 23, 42, 0.25); /* Faint dark grey background canvas */
+  border: 1px solid var(--border-color); /* Boundary border outline */
+  border-radius: 12px; /* Rounding dashboard corner borders */
+  padding: 1.5rem 2rem; /* Breathing room padding margins */
+} /* Terminating score-dashboard styles block */
+body.light-mode .score-dashboard { /* Adapt dashboard background contrast in light mode */
+  background-color: rgba(255, 255, 255, 0.6); /* Semi-transparent white card canvas */
+} /* Terminating light mode dashboard background override */
+.circular-progress { /* Visual donut score completion graph layout */
+  position: relative; /* Anchor container for absolute overlay element placements */
+  width: 120px; /* Increased chart width for more premium spacing */
+  height: 120px; /* Increased chart height for more premium spacing */
+  border-radius: 50%; /* Shaping chart wrapper to complete circle */
+  background: conic-gradient(var(--accent-start) var(--score-percent, 0%), rgba(255, 255, 255, 0.05) 0%); /* Dynamic conic chart using inline variable values */
+  display: flex; /* Flexbox alignment layout model */
+  align-items: center; /* Centering values horizontally */
+  justify-content: center; /* Centering values vertically */
+} /* Terminating circular-progress styles block */
+.circular-progress::before { /* Inner circle cutout for conic chart donut visualization */
+  content: ""; /* Null character requirement */
+  position: absolute; /* Place on top of conic gradient circle background */
+  width: 102px; /* Increased cutout diameter to make the progress ring thinner and sleeker */
+  height: 102px; /* Increased cutout diameter to make the progress ring thinner and sleeker */
+  background-color: var(--bg-color); /* Fill cutout with background page canvas color */
+  border-radius: 50%; /* Make circle */
+  transition: background-color 0.4s ease; /* Support transitions for theme modes */
+} /* Terminating conic chart cutout */
+.score-value { /* Percentage text indicators on top of graphic */
+  position: relative; /* Absolute container overlay alignments */
+  z-index: 1; /* Raising layer index above cutout shapes */
+  display: flex; /* Flexible layout stack */
+  align-items: center; /* Centering labels horizontally */
+  justify-content: center; /* Centering labels vertically */
+  font-weight: 800; /* Extra bold text styling */
+  font-size: 1.8rem; /* Magnified percentage font size for premium design */
+  white-space: nowrap; /* Prevent percentage text from wrapping inside circle */
+  color: var(--text-primary); /* Use primary text color for readability */
+} /* Terminating score-value styles block */
+.score-ratio-badge { /* Modern pill badge showing correct answers ratio next to donut */
+  display: inline-flex; /* Align inline items easily */
+  align-items: center; /* Center badge text vertically */
+  /* Gap spacing separating flex items inside pill badge */
+  gap: 0.3rem;
+  padding: 0.35rem 0.8rem; /* Comfortable padding inside badge */
+  background-color: rgba(99, 102, 241, 0.08); /* Semi-transparent background matching theme accent */
+  border: 1px solid rgba(99, 102, 241, 0.15); /* Sleek thin border styling */
+  border-radius: 50px; /* Completely rounded pill badge shape */
+  color: var(--accent-start); /* Dynamic color based on theme mode state variables */
+  font-size: 0.85rem; /* Sizing badge typography small */
+  font-weight: 600; /* Semi-bold weight for readability */
+  width: fit-content; /* Restrict width size to text contents fit */
+  margin-bottom: 0.2rem; /* Vertical spacing separating badge from title */
+} /* Terminating score-ratio-badge styles block */
+.rating-info { /* Feedback textual explanations section */
+  display: flex; /* Flexible layout stack */
+  flex-direction: column; /* Vertical stacking alignment */
+  gap: 0.4rem; /* Separation distance between title and text body */
+} /* Terminating rating-info styles block */
+.rating-info h3 { /* Rating title typography styling rules */
+  font-size: 1.3rem; /* Font size sizing */
+  font-weight: 800; /* Extra bold weight styling */
+  letter-spacing: -0.3px; /* Slightly compacting letters */
+} /* Terminating rating title styles block */
+.rating-info p { /* Rating description typography styling rules */
+  font-size: 0.95rem; /* Sizing description text size */
+  color: var(--text-secondary); /* Grey secondary color */
+  line-height: 1.4; /* Line height readability scale */
+} /* Terminating rating description styles block */
+.review-list { /* Question review history logs collection container */
+  display: flex; /* Flexible layout stack */
+  flex-direction: column; /* Stack logs vertically */
+  gap: 1.25rem; /* Separation margins */
+  margin-top: 1rem; /* Top spacing padding metrics */
+} /* Terminating review-list styles block */
+.review-item { /* Individual reviewed question layout panels */
+  border: 1px solid var(--border-color); /* Outlining borders */
+  border-radius: 10px; /* Rounding panels */
+  padding: 1.25rem 1.5rem; /* Internal layout breathing room margins */
+  background-color: rgba(255, 255, 255, 0.01); /* Faint container layout background overlay */
+} /* Terminating review-item styles block */
+.review-question-header { /* Title banner for reviewed logs items */
+  display: flex; /* Flexible alignment row */
+  align-items: flex-start; /* Place items starting from top */
+  justify-content: space-between; /* Move title left and correctness badges right */
+  gap: 1rem; /* Space distance separating header contents */
+  margin-bottom: 0.8rem; /* Space separation below header */
+} /* Terminating review-question-header styles block */
+.review-question-header h4 { /* Reviewed question texts sizes */
+  font-size: 1.05rem; /* Typography sizing */
+  font-weight: 600; /* Semi-bold weight */
+  line-height: 1.4; /* Line height */
+  color: var(--text-primary); /* Primary text colors */
+} /* Terminating review question titles */
+.correctness-badge { /* Small status badges indicating answer evaluations */
+  padding: 0.3rem 0.6rem; /* Comfortable badge dimensions */
+  border-radius: 50px; /* Rounding badge pill shape */
+  font-size: 0.75rem; /* Typography sizing */
+  font-weight: 700; /* Bold weight settings */
+  text-transform: uppercase; /* Capitalizing badge labels */
+  letter-spacing: 0.3px; /* Visual spacing adjustments */
+  white-space: nowrap; /* Avoid labels splitting on wrapped rows */
+} /* Terminating correctness-badge styles block */
+.correctness-badge.correct { /* Positive evaluation states configuration */
+  background-color: rgba(16, 185, 129, 0.15); /* Green overlay background tint */
+  color: var(--correct-border); /* Highlight text in green colors */
+  border: 1px solid var(--correct-border); /* Green borders outline */
+} /* Terminating correct status badges styling */
+.correctness-badge.incorrect { /* Negative evaluation states configuration */
+  background-color: rgba(239, 68, 68, 0.15); /* Red overlay background tint */
+  color: var(--incorrect-border); /* Highlight text in red colors */
+  border: 1px solid var(--incorrect-border); /* Red borders outline */
+} /* Terminating incorrect status badges styling */
+.review-answers-grid { /* Visual checklist comparison display layout */
+  display: flex; /* Flex layouts */
+  flex-direction: column; /* Stacking items vertically */
+  gap: 0.4rem; /* Gap metrics spacing */
+  font-size: 0.9rem; /* Sizing comparisons small */
+} /* Terminating review-answers-grid styles block */
+.review-answer-line { /* Individual comparison record indicator lines */
+  color: var(--text-secondary); /* Grey secondary color */
+} /* Terminating review-answer-line styles block */
+.review-answer-line strong { /* Labels highlight markers styling */
+  color: var(--text-primary); /* Primary labels colors text */
+} /* Terminating comparison labels highlights */
+.review-answer-line.user-answer.incorrect { /* Highlights incorrect user choices specifically in logs reviews */
+  color: var(--incorrect-border); /* Highlight user answers row red */
+} /* Terminating user error highlights */
+.review-answer-line.user-answer.correct { /* Highlights correct user choices in logs reviews */
+  color: var(--correct-border); /* Highlight user answers row green */
+} /* Terminating user correct highlights */
+.summary-footer { /* Separating summary action buttons from review block */
+  margin-top: 1.5rem; /* Margins */
+} /* Terminating summary-footer styles block */
+.outline-tree { /* Container for the interactive course outline tree structure */
+  background-color: rgba(15, 23, 42, 0.4); /* Solid deep grey background matching other input fields */
+  border: 1px solid var(--border-color); /* Outlining container boundaries with dynamic border color */
+  border-radius: 8px; /* Softly rounding border corners of outline container */
+  padding: 1rem; /* Creating internal padding for checklist items spacing */
+  max-height: 250px; /* Restricting maximum vertical size of syllabus list */
+  overflow-y: auto; /* Enabling vertical scrolling for long syllabus lists */
+} /* Terminating outline-tree styles block */
+body.light-mode .outline-tree { /* Adapting syllabus container contrast for light mode */
+  background-color: rgba(255, 255, 255, 0.85); /* Applying clean white background in light mode */
+} /* Terminating light mode outline-tree contrast override */
+.outline-unit { /* Container for an individual unit section in outline */
+  margin-bottom: 0.8rem; /* Bottom margin separating unit blocks */
+} /* Terminating outline-unit styles block */
+.outline-unit-header { /* Header container for the unit name and checkbox */
+  display: flex; /* Setting alignment layout model to Flexbox */
+  align-items: center; /* Aligning unit elements vertically on the row */
+  gap: 0.5rem; /* Space distance separating checkbox and unit name */
+  font-weight: 600; /* Styling unit name text to bold weight */
+  margin-bottom: 0.3rem; /* Space separation below unit header */
+} /* Terminating outline-unit-header styles block */
+.outline-lessons-list { /* Container containing lesson items under a unit */
+  padding-left: 1.5rem; /* Indenting lesson list under their parent unit */
+  display: flex; /* Setting alignment layout model to Flexbox */
+  flex-direction: column; /* Aligning lesson list components vertically */
+  gap: 0.3rem; /* Vertical margins separating lesson checkbox items */
+} /* Terminating outline-lessons-list styles block */
+.outline-lesson-item { /* Container for an individual lesson checklist item */
+  display: flex; /* Setting alignment layout model to Flexbox */
+  align-items: center; /* Aligning lesson elements vertically on the row */
+  gap: 0.5rem; /* Space distance separating checkbox and lesson name */
+  font-size: 0.9rem; /* Sizing lesson name typography small */
+  opacity: 0.95; /* Fading layout opacity slightly for text hierarchy */
+} /* Terminating outline-lesson-item styles block */
+.cookie-instructions { /* Styling the cookie instructions text */
+  font-size: 0.8rem; /* Small typography sizing */
+  color: var(--text-secondary); /* Grey secondary color */
+  line-height: 1.4; /* Line height readability scale */
+  margin-top: 0.2rem; /* Margins spacing at the top */
+} /* Terminating cookie-instructions styles block */
+.explanation-panel a { /* Styling hyperlink elements inside explanation panels */
+  color: var(--accent-start); /* Applying indigo accent color to source links */
+  text-decoration: none; /* Removing default underline styling from links */
+  font-weight: 600; /* Styling link text weight to semi-bold */
+  border-bottom: 1px dashed var(--accent-start); /* Dynamic dashed bottom border */
+  transition: all 0.3s ease; /* Setting element transition speeds */
+} /* Terminating explanation-panel link styles block */
+.explanation-panel a:hover { /* Hover styling for links in explanation panels */
+  color: var(--accent-end); /* Shifting link color to purple on hover */
+  border-bottom-color: var(--accent-end); /* Changing border color to purple */
+  box-shadow: 0 2px 8px rgba(168, 85, 247, 0.2); /* Adding soft glow drop shadow */
+} /* Terminating explanation-panel link hover block */
+.header-controls { /* Flex container aligning sound controls and theme toggle */
+  display: flex; /* Flexbox alignment layout model */
+  align-items: center; /* Vertical alignment centering */
+  gap: 1.2rem; /* Spacing between controls groups */
+} /* Terminating header-controls styles block */
+.sound-controls { /* Wrap container for sound settings */
+  display: flex; /* Flexbox alignment layout model */
+  align-items: center; /* Vertical alignment centering */
+  gap: 0.5rem; /* Gap separating mute button and volume slider */
+  background-color: var(--card-bg); /* Matching glassmorphic container background */
+  border: 1px solid var(--border-color); /* Outlining borders */
+  padding: 0.4rem 0.8rem; /* Inner spacing */
+  border-radius: 50px; /* Rounded pill shape */
+} /* Terminating sound-controls styles block */
+.icon-btn { /* Style for icon-only helper buttons */
+  background: transparent; /* No background */
+  border: none; /* No border */
+  font-size: 1.1rem; /* Adjust emoji size */
+  cursor: pointer; /* Pointer cursor hand on hover */
+  transition: transform 0.2s ease; /* Hover transition effect */
+} /* Terminating icon-btn styles block */
+.icon-btn:hover { /* Hover zoom effect for icon buttons */
+  transform: scale(1.15); /* Magnify icon size */
+} /* Terminating icon-btn hover block */
+.volume-slider { /* Customizing volume input range slider appearance */
+  width: 60px; /* Restricting volume slider width */
+  cursor: pointer; /* Set pointer cursor */
+  accent-color: var(--accent-start); /* Apply theme indigo accent color to slider thumb */
+} /* Terminating volume-slider styles block */
+.hidden { /* Utility class to hide element */
+  display: none !important; /* Forcefully hiding element from being rendered on screen */
+} /* Terminating hidden helper block */
+@media (max-width: 900px) { /* Media screen breakpoint rule for tablet and small device widths */
+  .wizard-layout.has-sidebar { /* Responsive vertical stack fallback layout on smaller devices */
+    grid-template-columns: 1fr; /* Switch from side-by-side columns grid to single full-width stack columns */
+    align-items: stretch; /* Stretch items size horizontally */
+    gap: 1.5rem; /* Keep vertical margins compact */
+  } /* Terminating mobile grid override block */
+  .wizard-card { /* Adjusting wizard card size padding scale metrics on tablets */
+    padding: 1.5rem; /* Decreasing layout container padding */
+  } /* Terminating responsive card updates */
+  .score-dashboard { /* Stacking scores elements vertically on small width devices */
+    flex-direction: column; /* Stacking metrics items */
+    align-items: center; /* Centering items */
+    gap: 1rem; /* Compacting margins */
+    text-align: center; /* Center aligning details */
+  } /* Terminating responsive dashboard configurations updates */
+  .container { /* Compacting padding metrics on mobile devices */
+    padding: 1.5rem 1rem; /* Decreasing spacing margins */
+  } /* Terminating responsive container updates */
+} /* Terminating mobile layout media block */
+@media print { /* Custom styling instructions specifically applied during browser PDF printing */
+  body { /* Resetting document background controls */
+    background: #ffffff !important; /* Forcing white paper canvas background */
+    color: #000000 !important; /* Forcing black typeface color for printing readability */
+  } /* Terminating print body reset */
+  .container { /* Resetting margin metrics for print layouts */
+    padding: 0 !important; /* Removing paddings to maximize printable paper dimensions */
+  } /* Terminating print container reset */
+  .glass-bg, .app-header, .wizard-actions, .actions-group, #themeToggle, .circular-progress::before { /* Selecting all irrelevant settings UI elements */
+    display: none !important; /* Stripping components off the print page view completely */
+  } /* Terminating print interface stripped elements */
+  .wizard-card { /* Resetting wizard card layouts during saves to PDF */
+    background: transparent !important; /* Stripping glass container backgrounds */
+    border: none !important; /* Removing card container borders */
+    box-shadow: none !important; /* Removing screen shadow overlays */
+    padding: 0 !important; /* Removing paddings */
+  } /* Terminating print card reset */
+  .circular-progress { /* Plain styling graphic layouts in printouts */
+    background: #ffffff !important; /* Remove conic gradient fills */
+    border: 3px solid #000000 !important; /* Replace conic graphic with simple black border ring outline */
+  } /* Terminating print conic graphics override */
+  .review-item { /* Clean borders outline for question summaries blocks */
+    background: transparent !important; /* Stripping backgrounds */
+    border: 1px solid #cccccc !important; /* Standard grey outlines line dividers */
+    page-break-inside: avoid; /* Prevent browser from slicing a single question panel across page breaks */
+  } /* Terminating print review item updates */
+  /* Badge styles styling for prints */
+  .correctness-badge {
+    /* Bold black borders */
+    border-color: #000000 !important;
+    /* Text color */
+    color: #000000 !important;
+    /* Faded overlays */
+    background: transparent !important;
+  }
+}
+
+/* Media query for standard desktop screen height fitting */
+@media (min-height: 600px) and (min-width: 901px) {
+  /* Style body to prevent window scrolling */
+  body {
+    /* Set body height to fill the screen */
+    height: 100vh;
+    /* Hide body overflow to prevent scrollbars */
+    overflow: hidden;
+  }
+  /* Style main container to fill screen height and align components */
+  .container {
+    /* Set container height to fill the screen */
+    height: 100vh;
+    /* Reduce top/bottom padding slightly to fit everything */
+    padding: 1.25rem 1.5rem;
+    /* Set alignment layout model to Flexbox */
+    display: flex;
+    /* Align components vertically */
+    flex-direction: column;
+  }
+  /* Style header bar to have zero vertical shrink */
+  .app-header {
+    /* Reduce bottom margin spacing */
+    margin-bottom: 1rem;
+    /* Prevent header from shrinking */
+    flex-shrink: 0;
+  }
+  /* Style wizard layout to stretch and fill remaining space */
+  .wizard-layout {
+    /* Instruct layout to grow and fill empty space */
+    flex: 1;
+    /* Set minimum height to zero to allow proper flexing */
+    min-height: 0;
+    /* Align items to stretch to full height */
+    align-items: stretch;
+  }
+  /* Style wizard layout grid when two-column sidebar view is active */
+  .wizard-layout.has-sidebar {
+    /* Align items to stretch to full height */
+    align-items: stretch;
+    /* Set height to match parent layout */
+    height: 100%;
+  }
+  /* Style custom sidebar panel inside height-constrained layout */
+  .outline-sidebar {
+    /* Set height to match parent layout */
+    height: 100%;
+    /* Set minimum height to zero for proper scrolling */
+    min-height: 0;
+    /* Flexbox alignment layout model */
+    display: flex;
+    /* Align components vertically inside sidebar */
+    flex-direction: column;
+  }
+  /* Style outline tree inside sidebar to scroll internally */
+  .outline-sidebar .outline-tree {
+    /* Instruct tree container to grow and fill empty sidebar space */
+    flex: 1;
+    /* Set minimum height to zero for proper scrolling */
+    min-height: 0;
+    /* Remove fixed max-height constraints */
+    max-height: none;
+    /* Enable vertical scrolling for long syllabus lists */
+    overflow-y: auto;
+  }
+  /* Style wizard card inside height-constrained layout */
+  .wizard-card {
+    /* Set height to match parent layout */
+    height: 100%;
+    /* Set minimum height to zero for proper scrolling */
+    min-height: 0;
+    /* Flexbox alignment layout model */
+    display: flex;
+    /* Align components vertically inside card */
+    flex-direction: column;
+  }
+  /* Style individual wizard step container inside screen-height card */
+  .step-container {
+    /* Set height to match parent card */
+    height: 100%;
+    /* Set minimum height to zero for proper scrolling */
+    min-height: 0;
+    /* Flexbox alignment layout model */
+    display: flex;
+    /* Align components vertically inside step */
+    flex-direction: column;
+    /* Reduce spacing margins */
+    gap: 1rem;
+  }
+  /* Enable internal scrollbars on Step 2 settings container */
+  #step2 {
+    /* Enable vertical scrolling if contents exceed height */
+    overflow-y: auto;
+    /* Add minor right padding to prevent layout shift */
+    padding-right: 0.5rem;
+  }
+  /* Enable internal scrollbars on Step 3 quiz player container */
+  #step3 {
+    /* Enable vertical scrolling if contents exceed height */
+    overflow-y: auto;
+  }
+  /* Add minor right padding to inner content instead of container to prevent layout shift */
+  #step3 > *:not(.player-actions) {
+    /* Apply right padding specifically for the scrollbar offset */
+    padding-right: 2rem;
+  }
+  /* Enable internal scrollbars on Step 4 score summary container */
+  #step4 {
+    /* Enable vertical scrolling if contents exceed height */
+    overflow-y: auto;
+    /* Add minor right padding to prevent layout shift */
+    padding-right: 0.5rem;
+  }
+  /* Style question review history logs collection container to scroll internally */
+  .review-list {
+    /* Instruct review list to grow and fill remaining step 4 space */
+    flex: 1;
+    /* Set minimum height to zero for proper scrolling */
+    min-height: 0;
+    /* Enable vertical scrolling for review cards */
+    overflow-y: auto;
+    /* Add minor right padding to prevent layout shift */
+    padding-right: 0.5rem;
+  }
+}
+/* Styling rules targeting step 3 container */
+#step3 .player-header {
+  /* Reducing bottom padding of player header */
+  padding-bottom: 0.8rem;
+  /* Narrowing gap between question indicator and progress bar */
+  gap: 0.4rem;
+/* Closing bracket for step 3 header rules */
+}
+/* Styling rules targeting active question card */
+#step3 .question-card {
+  /* Reducing vertical padding on question card container */
+  padding: 0.8rem 0;
+/* Closing bracket for step 3 card rules */
+}
+/* Styling rules targeting active question text block */
+#step3 .question-text {
+  /* Setting balanced font size of question title to prevent scrolling */
+  font-size: 1.25rem;
+  /* Setting balanced vertical spacing margins under question title text */
+  margin-bottom: 1rem;
+  /* Narrowing text line height parameter */
+  line-height: 1.35;
+/* Closing bracket for question text rules */
+}
+/* Styling rules targeting question options list wrapper */
+#step3 .options-list {
+  /* Setting balanced gap spacing distance between option choices */
+  gap: 0.6rem;
+/* Closing bracket for options list rules */
+}
+/* Styling rules targeting individual option choice items */
+#step3 .option-item {
+  /* Setting balanced internal padding of clickable option block */
+  padding: 0.75rem 1.1rem;
+  /* Setting balanced font size of choice text content to prevent scrolling */
+  font-size: 0.95rem;
+/* Closing bracket for option item rules */
+}
+/* Styling rules targeting explanation panel inside step 3 */
+#step3 .explanation-panel {
+  /* Setting balanced explanation details font size to prevent scrolling */
+  font-size: 0.85rem;
+/* Closing bracket for explanation panel rules */
+}
+/* Styling rules targeting navigation button actions panel */
+#step3 .player-actions {
+  /* Set balanced margin-top spacing separating buttons from content */
+  margin-top: 0.8rem;
+  /* Decreasing top padding inside footer actions layout */
+  padding-top: 0.8rem;
+  /* Push buttons in from the left edge to align with content */
+  padding-left: 1.5rem;
+  /* Push buttons in from the right edge to align with content */
+  padding-right: 1.5rem;
+  /* Increase bottom padding to balance layout and spacing */
+  padding-bottom: 1.2rem;
+  /* Ensure bottom corners are straight */
+  border-radius: 0;
+/* Closing bracket for player actions rules */
+}
+/* Styling rules targeting wizard card container when quiz is active */
+.wizard-card.quiz-active {
+  /* Remove padding to allow actions bar to stretch full width natively */
+  padding: 0;
+  /* Make bottom corners straight */
+  border-bottom-left-radius: 0;
+  /* Make bottom corners straight */
+  border-bottom-right-radius: 0;
+/* Closing bracket for quiz active card styles */
+}
+/* Apply top padding to the step container to replace card padding */
+#step3 {
+  /* Apply padding replacing wizard card padding */
+  padding-top: 1.5rem;
+}
+/* Apply horizontal padding to all step3 children EXCEPT the player-actions bar */
+#step3 > *:not(.player-actions) {
+  /* Apply left padding replacing wizard card padding */
+  padding-left: 1.5rem;
+  /* Apply right padding replacing wizard card padding */
+  padding-right: 1.5rem;
+}
+/* Styling to hide header controls in step 1 */
+body.step-1-active .header-controls {
+  /* Hide the container holding sound settings and theme toggle */
+  display: none !important;
+/* Terminating step-1-active header controls rule block */
+}
+/* Styling to center the header container in step 1 */
+body.step-1-active .app-header {
+  /* Center align the logo area horizontally in flexbox layout */
+  justify-content: center;
+  /* Center align text in header */
+  text-align: center;
+/* Terminating step-1-active app-header rule block */
+}
+/* Styling export actions row in step 2 */
+.export-actions {
+  /* Flexbox alignment row layout */
+  display: flex;
+  /* Margins separating buttons */
+  gap: 0.75rem;
+  /* Margins spacing at the top */
+  margin-top: 0.5rem;
+/* Terminating export-actions block */
+}
+/* Style export buttons to share row space equally */
+.export-actions .secondary-btn {
+  /* Fill row space equally */
+  flex: 1;
+/* Terminating export secondary-btn rules */
+}
+/* Style player header top row to space items horizontally */
+.player-header-top {
+  /* Flexbox alignment row layout */
+  display: flex;
+  /* Space out indicator and focus button */
+  justify-content: space-between;
+  /* Center items vertically */
+  align-items: center;
+  /* Margin separation bottom */
+  margin-bottom: 0.5rem;
+/* Terminating player-header-top block */
+}
+/* Style focus toggle button container */
+.focus-toggle-btn {
+  /* Padding button internal space */
+  padding: 0.4rem 0.9rem;
+  /* Font size adjustment */
+  font-size: 0.85rem;
+  /* Border radius style */
+  border-radius: 50px;
+/* Terminating focus-toggle-btn block */
+}
+/* Target dark background state when focus mode is active */
+body.focus-mode-active {
+  /* Solid very dark background color */
+  background-color: #05070c !important;
+  /* Transition speed for smooth fade */
+  transition: background-color 0.4s ease;
+/* Terminating focus-mode-active body block */
+}
+/* Target glass background decoration when focus mode is active */
+body.focus-mode-active .glass-bg {
+  /* Completely hide background decorative elements */
+  display: none !important;
+/* Terminating focus-mode-active glass-bg block */
+}
+/* Force solid background for action bar in focus mode */
+body.focus-mode-active {
+  --focus-action-bg: #0f1322; /* Dark mode flattened color */
+}
+body.focus-mode-active.light-mode {
+  --focus-action-bg: #c2c3c4; /* Light mode flattened color */
+}
+body.focus-mode-active #step3 .player-actions {
+  background-color: var(--focus-action-bg) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+/* Target main app header when focus mode is active */
+body.focus-mode-active .app-header {
+  /* Completely hide app top header */
+  display: none !important;
+/* Terminating focus-mode-active app-header block */
+}
+/* Target course outline sidebar when focus mode is active */
+body.focus-mode-active .outline-sidebar {
+  /* Completely hide left sidebar outline box */
+  display: none !important;
+/* Terminating focus-mode-active outline-sidebar block */
+}
+/* Target main layout container when focus mode is active */
+body.focus-mode-active .container {
+  /* Adjust container padding to zero */
+  padding: 0 !important;
+  /* Span full viewport minimum height */
+  min-height: 100vh;
+  /* Flexbox centering layout model */
+  display: flex;
+  /* Align vertically */
+  flex-direction: column;
+  /* Center content vertically */
+  justify-content: center;
+  /* Center content horizontally */
+  align-items: center;
+/* Terminating focus-mode-active container block */
+}
+/* Target wizard layout grid when focus mode is active */
+body.focus-mode-active .wizard-layout {
+  /* Switch from grid back to centering flex layout */
+  display: flex;
+  /* Centering layout horizontally */
+  justify-content: center;
+  /* Centering layout vertically */
+  align-items: center;
+  /* Span full layout width */
+  width: 100%;
+  /* Restrict maximum width dimension */
+  max-width: 800px;
+  /* Reset height default settings */
+  height: auto;
+  /* Reset gaps layout settings */
+  gap: 0;
+/* Terminating focus-mode-active wizard-layout block */
+}
+/* Target wizard card container when focus mode is active */
+body.focus-mode-active .wizard-card {
+  /* Center margin layout settings */
+  margin: 0 auto;
+  /* Restrict maximum card width focus */
+  max-width: 800px;
+  /* Span full width of layout */
+  width: 100%;
+  /* Extra deep shadow glow for premium dark appearance */
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+/* Terminating focus-mode-active wizard-card block */
+}
+/* Style override for step 2 container to reduce gap spacing */
+#step2.step-container {
+  /* Reduce gap from 1.2rem to 0.75rem */
+  gap: 0.75rem;
+/* Closing bracket for step 2 container rules */
+}
+/* Style override for step 2 input groups to reduce gap spacing */
+#step2 .input-group {
+  /* Reduce gap from 0.6rem to 0.35rem */
+  gap: 0.35rem;
+/* Closing bracket for step 2 input groups rules */
+}
+/* Style override for step 2 cookie instructions to reduce margins and line height */
+#step2 .cookie-instructions {
+  /* Reduce top margin to bring instructions closer */
+  margin-top: 0.1rem;
+  /* Set compact line height */
+  line-height: 1.35;
+/* Closing bracket for step 2 cookie instructions rules */
+}

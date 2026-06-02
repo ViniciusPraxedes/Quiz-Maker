@@ -1,0 +1,37 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#a855f7" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Transparent background by default, no background rect needed -->
+
+  <!-- Question Mark -->
+  <path d="M 40 20 
+           C 25 20, 20 35, 20 40 
+           h 15 
+           C 35 35, 38 32, 45 32 
+           C 52 32, 55 37, 55 42 
+           C 55 48, 48 50, 45 55 
+           C 42 60, 42 65, 42 65 
+           h 16 
+           C 58 65, 58 62, 60 57 
+           C 65 50, 72 45, 72 35 
+           C 72 22, 60 20, 40 20 Z 
+           
+           M 42 75 
+           h 16 
+           v 15 
+           h -16 Z" 
+        fill="url(#primaryGradient)" />
+        
+  <!-- Sparkle/Star Icon (Gemini style) -->
+  <path d="M 85 10 
+           C 85 10, 89 25, 98 28 
+           C 89 31, 85 46, 85 46 
+           C 85 46, 81 31, 72 28 
+           C 81 25, 85 10, 85 10 Z" 
+        fill="url(#primaryGradient)" />
+</svg>
