@@ -166,7 +166,7 @@ export async function POST(request) {
     // Extract requested quiz question count or default to 5
     const count = params.count || 5;
     // Resolve SAP session cookie from parameters or server env
-    const sap_cookie = (params.sap_session_cookie || "").trim() || (process.env.SAP_SESSION_COOKIE || "").trim();
+    const sap_cookie = (process.env.SAP_SESSION_COOKIE || "").trim();
     // Resolve Gemini API key from parameters or server env
     const gemini_key = (params.gemini_api_key || "").trim() || (process.env.GEMINI_API_KEY || "").trim();
     // Resolve Gemini model version parameter or default to gemini-3.5-flash

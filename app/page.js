@@ -16,8 +16,6 @@ export default function Page() {
   const [step, setStep] = useState(1);
   // Setup course URL input field text value state
   const [courseUrl, setCourseUrl] = useState("");
-  // Setup SAP cookie input field password text state
-  const [sapCookie, setSapCookie] = useState("");
   // Setup difficulty selection dropdown option value state
   const [difficulty, setDifficulty] = useState("Intermediate");
   // Setup total quiz questions count state
@@ -341,8 +339,6 @@ export default function Page() {
     const payload = {
       // Inject course URL
       course_url: courseUrl.trim(),
-      // Inject SAP cookie
-      sap_session_cookie: sapCookie.trim(),
     // Close payload dictionary
     };
     // Try block to perform fetch
@@ -690,8 +686,6 @@ export default function Page() {
       difficulty,
       // Pass questions count count parameter
       count: parseInt(qCount, 10),
-      // Pass SAP session cookie
-      sap_session_cookie: sapCookie.trim(),
       // Pass Gemini API key
       gemini_api_key: geminiApiKey.trim(),
       // Pass Gemini model identifier
@@ -933,8 +927,6 @@ export default function Page() {
     const payload = {
       // Pass selected lesson URLs array
       unit_ids: rawUnits,
-      // Pass SAP session cookie
-      sap_session_cookie: sapCookie.trim(),
     // Close payload dictionary
     };
     // Try block to perform content fetch
@@ -1453,7 +1445,7 @@ export default function Page() {
                     <input
                       type="password"
                       id="geminiApiKey"
-                      placeholder="Enter API Key (or leave empty to use server .env)"
+                      placeholder="Enter API Key"
                       style={{ flex: 1 }}
                       value={geminiApiKey}
                       onChange={(e) => setGeminiApiKey(e.target.value)}
@@ -1510,27 +1502,6 @@ export default function Page() {
                   {/* Close geminiModelWrapper container */}
                   </div>
                 )}
-              {/* Close input-group container */}
-              </div>
-
-              {/* Optional SAP Session cookie input layout */}
-              <div className="input-group">
-                {/* Cookie input label */}
-                <label htmlFor="sapCookie">SAP Session Cookie (Optional)</label>
-                {/* Cookie password input field */}
-                <input
-                  type="password"
-                  id="sapCookie"
-                  placeholder="Leave empty to use server .env value"
-                  value={sapCookie}
-                  onChange={(e) => setSapCookie(e.target.value)}
-                />
-                {/* Caption instructions text */}
-                <p className="cookie-instructions">
-                  To obtain your session cookie, log in to SAP Learning, open DevTools (F12) -{">"}{" "}
-                  Application -{">"} Cookies, select learning.sap.com, and copy the value of{" "}
-                  <code>SAP_SESSION_COOKIE</code>.
-                </p>
               {/* Close input-group container */}
               </div>
 

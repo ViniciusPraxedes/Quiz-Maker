@@ -12,7 +12,7 @@ export async function POST(request) {
     // Get the list of selected unit IDs or URLs from parameters
     const unit_inputs = params.unit_ids || [];
     // Resolve SAP session cookie from parameters or server env
-    const sap_cookie = (params.sap_session_cookie || "").trim() || (process.env.SAP_SESSION_COOKIE || "").trim();
+    const sap_cookie = (process.env.SAP_SESSION_COOKIE || "").trim();
     // Validate if any lesson inputs are selected
     if (unit_inputs.length === 0) {
       // Throw an error if the lesson list is empty

@@ -10,7 +10,7 @@ export async function POST(request) {
     // Retrieve and trim the course URL from params
     let course_url = (params.course_url || "").trim();
     // Resolve SAP session cookie from parameters or server env
-    const sap_cookie = (params.sap_session_cookie || "").trim() || (process.env.SAP_SESSION_COOKIE || "").trim();
+    const sap_cookie = (process.env.SAP_SESSION_COOKIE || "").trim();
     // Validate if the course URL is provided
     if (!course_url) {
       // Throw an error if URL parameter is missing
