@@ -996,6 +996,73 @@ body.light-mode .outline-tree { /* Adapting syllabus container contrast for ligh
 .hidden { /* Utility class to hide element */
   display: none !important; /* Forcefully hiding element from being rendered on screen */
 } /* Terminating hidden helper block */
+.how-it-works { /* Preview gallery section shown below the load outline button on step 1 */
+  margin-top: 0.6rem; /* Separation spacing above the gallery */
+  padding-top: 1rem; /* Internal breathing room above the heading */
+  border-top: 1px solid var(--border-color); /* Divider line separating gallery from the form above */
+} /* Terminating how-it-works styles block */
+.how-it-works h3 { /* Gallery section heading styles */
+  font-size: 0.9rem; /* Typography sizing */
+  font-weight: 700; /* Bold weight styling */
+  color: var(--text-secondary); /* Secondary grey text color */
+  text-transform: uppercase; /* Capitalizing heading label */
+  letter-spacing: 0.5px; /* Slight letter spacing for label feel */
+  margin-bottom: 0.75rem; /* Spacing below heading */
+} /* Terminating how-it-works heading styles */
+.how-it-works-grid { /* Responsive grid layout for the preview screenshot cards */
+  display: grid; /* Grid alignment layout model */
+  grid-template-columns: repeat(4, 1fr); /* Single row of four columns to minimize vertical space */
+  gap: 0.75rem; /* Spacing separating the cards */
+} /* Terminating how-it-works-grid styles block */
+.how-it-works-card { /* Individual screenshot preview card */
+  position: relative; /* Anchor for the absolutely positioned step badge */
+  display: flex; /* Flexbox alignment layout model */
+  flex-direction: column; /* Stack image above caption */
+  gap: 0.4rem; /* Spacing separating image and caption */
+} /* Terminating how-it-works-card styles block */
+.how-it-works-badge { /* Numbered step indicator overlaid on each thumbnail */
+  position: absolute; /* Float on top of the thumbnail corner */
+  top: 0.35rem; /* Offset from the top edge of the thumbnail */
+  left: 0.35rem; /* Offset from the left edge of the thumbnail */
+  z-index: 1; /* Raise above the thumbnail image */
+  display: flex; /* Flexbox alignment layout model */
+  align-items: center; /* Center digit vertically */
+  justify-content: center; /* Center digit horizontally */
+  width: 20px; /* Fixed badge width */
+  height: 20px; /* Fixed badge height matching width */
+  border-radius: 50%; /* Circular badge shape */
+  background: linear-gradient(135deg, var(--accent-start) 0%, var(--accent-end) 100%); /* Accent gradient fill */
+  color: #ffffff; /* White digit text for contrast */
+  font-size: 0.7rem; /* Digit typography size */
+  font-weight: 700; /* Bold digit weight */
+  box-shadow: 0 2px 8px rgba(0, 93, 229, 0.4); /* Soft accent glow shadow */
+} /* Terminating how-it-works-badge styles block */
+.how-it-works-card img { /* Screenshot thumbnail image styling */
+  width: 100%; /* Fill available card width */
+  border-radius: 8px; /* Rounding image corners */
+  border: 1px solid var(--border-color); /* Outlining thumbnail borders */
+  box-shadow: var(--shadow-main); /* Applying premium deep shadow to thumbnails */
+} /* Terminating how-it-works-card image styles */
+.how-it-works-card p { /* Screenshot caption text styling */
+  font-size: 0.68rem; /* Small caption typography */
+  color: var(--text-secondary); /* Secondary grey text color */
+  line-height: 1.3; /* Line height readability scale */
+  text-align: center; /* Centering caption text */
+} /* Terminating how-it-works-card caption styles */
+.how-it-works-card p strong { /* Bold step name lead-in within caption text */
+  color: var(--text-primary); /* Primary text color for the step name */
+  display: block; /* Place step name on its own line above the description */
+} /* Terminating how-it-works-card caption strong styles */
+@media (max-width: 900px) { /* Media breakpoint for tablet-sized viewports */
+  .how-it-works-grid { /* Switch to two columns before the mobile single-column stack kicks in */
+    grid-template-columns: repeat(2, 1fr); /* Two-by-two layout */
+  } /* Terminating tablet how-it-works-grid override */
+} /* Terminating tablet gallery media block */
+@media (max-width: 700px) { /* Media breakpoint for narrow viewports */
+  .how-it-works-grid { /* Collapse gallery grid to a single column on small screens */
+    grid-template-columns: 1fr; /* Stack cards vertically */
+  } /* Terminating mobile how-it-works-grid override */
+} /* Terminating mobile gallery media block */
 @media (max-width: 900px) { /* Media screen breakpoint rule for tablet and small device widths */
   .wizard-layout.has-sidebar { /* Responsive vertical stack fallback layout on smaller devices */
     grid-template-columns: 1fr; /* Switch from side-by-side columns grid to single full-width stack columns */
@@ -1140,6 +1207,13 @@ body.light-mode .outline-tree { /* Adapting syllabus container contrast for ligh
     flex-direction: column;
     /* Reduce spacing margins */
     gap: 1rem;
+  }
+  /* Enable internal scrollbars on Step 1 container now that it includes the how-it-works gallery */
+  #step1 {
+    /* Enable vertical scrolling if contents exceed height */
+    overflow-y: auto;
+    /* Add minor right padding to prevent layout shift */
+    padding-right: 0.5rem;
   }
   /* Enable internal scrollbars on Step 2 settings container */
   #step2 {

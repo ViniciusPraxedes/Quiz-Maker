@@ -1368,6 +1368,45 @@ export default function Page() {
                 Load Course Outline
               {/* Close load outline button */}
               </button>
+
+              {/* How it works preview gallery showcasing the rest of the wizard flow */}
+              <div className="how-it-works">
+                {/* Section heading label */}
+                <h3>How It Works</h3>
+                {/* Animated gif cards grid container, each looping the key interaction for that step */}
+                <div className="how-it-works-grid">
+                  {/* Step 1 preview card */}
+                  <div className="how-it-works-card">
+                    <span className="how-it-works-badge">1</span>
+                    <img src="/gifs/step1-load-outline.gif" alt="Enter a course URL or slug to load its syllabus" />
+                    <p><strong>Load Outline —</strong> Enter a course URL or slug to fetch its syllabus</p>
+                  {/* Close preview card */}
+                  </div>
+                  {/* Step 2 preview card */}
+                  <div className="how-it-works-card">
+                    <span className="how-it-works-badge">2</span>
+                    <img src="/gifs/step2-configure.gif" alt="Select lessons, then configure difficulty, question count, and Gemini model" />
+                    <p><strong>Configure —</strong> Pick lessons, difficulty, question count, and your Gemini model</p>
+                  {/* Close preview card */}
+                  </div>
+                  {/* Step 3 preview card */}
+                  <div className="how-it-works-card">
+                    <span className="how-it-works-badge">3</span>
+                    <img src="/gifs/step3-quiz-player.gif" alt="Take the generated quiz with instant explanations" />
+                    <p><strong>Take the Quiz —</strong> Answer questions with instant explanations and sources</p>
+                  {/* Close preview card */}
+                  </div>
+                  {/* Step 4 preview card */}
+                  <div className="how-it-works-card">
+                    <span className="how-it-works-badge">4</span>
+                    <img src="/gifs/step4-results.gif" alt="Review your score and detailed results breakdown" />
+                    <p><strong>Review Results —</strong> See your score and a full question-by-question breakdown</p>
+                  {/* Close preview card */}
+                  </div>
+                {/* Close how-it-works-grid container */}
+                </div>
+              {/* Close how-it-works container */}
+              </div>
             {/* Close step 1 container */}
             </div>
           )}
